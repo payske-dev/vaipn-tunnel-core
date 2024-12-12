@@ -160,16 +160,16 @@ const (
 	RemoteServerListSignaturePublicKey                 = "RemoteServerListSignaturePublicKey"
 	RemoteServerListURLs                               = "RemoteServerListURLs"
 	ObfuscatedServerListRootURLs                       = "ObfuscatedServerListRootURLs"
-	PsiphonAPIRequestTimeout                           = "PsiphonAPIRequestTimeout"
-	PsiphonAPIStatusRequestPeriodMin                   = "PsiphonAPIStatusRequestPeriodMin"
-	PsiphonAPIStatusRequestPeriodMax                   = "PsiphonAPIStatusRequestPeriodMax"
-	PsiphonAPIStatusRequestShortPeriodMin              = "PsiphonAPIStatusRequestShortPeriodMin"
-	PsiphonAPIStatusRequestShortPeriodMax              = "PsiphonAPIStatusRequestShortPeriodMax"
-	PsiphonAPIStatusRequestPaddingMinBytes             = "PsiphonAPIStatusRequestPaddingMinBytes"
-	PsiphonAPIStatusRequestPaddingMaxBytes             = "PsiphonAPIStatusRequestPaddingMaxBytes"
-	PsiphonAPIPersistentStatsMaxCount                  = "PsiphonAPIPersistentStatsMaxCount"
-	PsiphonAPIConnectedRequestPeriod                   = "PsiphonAPIConnectedRequestPeriod"
-	PsiphonAPIConnectedRequestRetryPeriod              = "PsiphonAPIConnectedRequestRetryPeriod"
+	VaipnAPIRequestTimeout                           = "PsiphonAPIRequestTimeout"
+	VaipnAPIStatusRequestPeriodMin                   = "PsiphonAPIStatusRequestPeriodMin"
+	VaipnAPIStatusRequestPeriodMax                   = "PsiphonAPIStatusRequestPeriodMax"
+	VaipnAPIStatusRequestShortPeriodMin              = "PsiphonAPIStatusRequestShortPeriodMin"
+	VaipnAPIStatusRequestShortPeriodMax              = "PsiphonAPIStatusRequestShortPeriodMax"
+	VaipnAPIStatusRequestPaddingMinBytes             = "PsiphonAPIStatusRequestPaddingMinBytes"
+	VaipnAPIStatusRequestPaddingMaxBytes             = "PsiphonAPIStatusRequestPaddingMaxBytes"
+	VaipnAPIPersistentStatsMaxCount                  = "PsiphonAPIPersistentStatsMaxCount"
+	VaipnAPIConnectedRequestPeriod                   = "PsiphonAPIConnectedRequestPeriod"
+	VaipnAPIConnectedRequestRetryPeriod              = "PsiphonAPIConnectedRequestRetryPeriod"
 	FetchSplitTunnelRoutesTimeout                      = "FetchSplitTunnelRoutesTimeout"
 	SplitTunnelRoutesURLFormat                         = "SplitTunnelRoutesURLFormat"
 	SplitTunnelRoutesSignaturePublicKey                = "SplitTunnelRoutesSignaturePublicKey"
@@ -358,7 +358,7 @@ const (
 	DNSResolverIncludeEDNS0Probability                 = "DNSResolverIncludeEDNS0Probability"
 	DNSResolverCacheExtensionInitialTTL                = "DNSResolverCacheExtensionInitialTTL"
 	DNSResolverCacheExtensionVerifiedTTL               = "DNSResolverCacheExtensionVerifiedTTL"
-	AddFrontingProviderPsiphonFrontingHeader           = "AddFrontingProviderPsiphonFrontingHeader"
+	AddFrontingProviderVaipnFrontingHeader           = "AddFrontingProviderPsiphonFrontingHeader"
 	DirectHTTPProtocolTransformSpecs                   = "DirectHTTPProtocolTransformSpecs"
 	DirectHTTPProtocolTransformScopedSpecNames         = "DirectHTTPProtocolTransformScopedSpecNames"
 	DirectHTTPProtocolTransformProbability             = "DirectHTTPProtocolTransformProbability"
@@ -465,7 +465,7 @@ const (
 	InproxyClientWebRTCAwaitDataChannelTimeout         = "InproxyClientWebRTCAwaitDataChannelTimeout"
 	InproxyProxyDestinationDialTimeout                 = "InproxyProxyDestinationDialTimeout"
 	InproxyProxyRelayInactivityTimeout                 = "InproxyProxyRelayInactivityTimeout"
-	InproxyPsiphonAPIRequestTimeout                    = "InproxyPsiphonAPIRequestTimeout"
+	InproxyVaipnAPIRequestTimeout                    = "InproxyPsiphonAPIRequestTimeout"
 	InproxyProxyTotalActivityNoticePeriod              = "InproxyProxyTotalActivityNoticePeriod"
 	InproxyPersonalPairingConnectionWorkerPoolSize     = "InproxyPersonalPairingConnectionWorkerPoolSize"
 	InproxyClientDialRateLimitQuantity                 = "InproxyClientDialRateLimitQuantity"
@@ -629,21 +629,21 @@ var defaultParameters = map[string]struct {
 	RemoteServerListURLs:               {value: TransferURLs{}},
 	ObfuscatedServerListRootURLs:       {value: TransferURLs{}},
 
-	PsiphonAPIRequestTimeout: {value: 10 * time.Second, minimum: 1 * time.Second, flags: useNetworkLatencyMultiplier},
+	VaipnAPIRequestTimeout: {value: 10 * time.Second, minimum: 1 * time.Second, flags: useNetworkLatencyMultiplier},
 
-	PsiphonAPIStatusRequestPeriodMin:      {value: 5 * time.Minute, minimum: 1 * time.Second},
-	PsiphonAPIStatusRequestPeriodMax:      {value: 10 * time.Minute, minimum: 1 * time.Second},
-	PsiphonAPIStatusRequestShortPeriodMin: {value: 5 * time.Second, minimum: 1 * time.Second},
-	PsiphonAPIStatusRequestShortPeriodMax: {value: 10 * time.Second, minimum: 1 * time.Second},
+	VaipnAPIStatusRequestPeriodMin:      {value: 5 * time.Minute, minimum: 1 * time.Second},
+	VaipnAPIStatusRequestPeriodMax:      {value: 10 * time.Minute, minimum: 1 * time.Second},
+	VaipnAPIStatusRequestShortPeriodMin: {value: 5 * time.Second, minimum: 1 * time.Second},
+	VaipnAPIStatusRequestShortPeriodMax: {value: 10 * time.Second, minimum: 1 * time.Second},
 	// VaipnAPIPersistentStatsMaxCount parameter is obsoleted by PersistentStatsMaxSendBytes.
 	// TODO: remove once no longer required for older clients.
-	PsiphonAPIPersistentStatsMaxCount: {value: 100, minimum: 1},
+	VaipnAPIPersistentStatsMaxCount: {value: 100, minimum: 1},
 	// VaipnAPIStatusRequestPadding parameters are obsoleted by APIRequestUp/DownstreamPadding.
 	// TODO: remove once no longer required for older clients.
-	PsiphonAPIStatusRequestPaddingMinBytes: {value: 0, minimum: 0},
-	PsiphonAPIStatusRequestPaddingMaxBytes: {value: 256, minimum: 0},
+	VaipnAPIStatusRequestPaddingMinBytes: {value: 0, minimum: 0},
+	VaipnAPIStatusRequestPaddingMaxBytes: {value: 256, minimum: 0},
 
-	PsiphonAPIConnectedRequestRetryPeriod: {value: 5 * time.Second, minimum: 1 * time.Millisecond},
+	VaipnAPIConnectedRequestRetryPeriod: {value: 5 * time.Second, minimum: 1 * time.Millisecond},
 
 	// FetchSplitTunnelRoutesTimeout, SplitTunnelRoutesURLFormat,
 	// SplitTunnelRoutesSignaturePublicKey and SplitTunnelDNSServer are obsoleted
@@ -881,7 +881,7 @@ var defaultParameters = map[string]struct {
 	DNSResolverCacheExtensionInitialTTL:         {value: time.Duration(0), minimum: time.Duration(0)},
 	DNSResolverCacheExtensionVerifiedTTL:        {value: time.Duration(0), minimum: time.Duration(0)},
 
-	AddFrontingProviderPsiphonFrontingHeader: {value: protocol.LabeledTunnelProtocols{}},
+	AddFrontingProviderVaipnFrontingHeader: {value: protocol.LabeledTunnelProtocols{}},
 
 	DirectHTTPProtocolTransformSpecs:            {value: transforms.Specs{}},
 	DirectHTTPProtocolTransformScopedSpecNames:  {value: transforms.ScopedSpecNames{}},
@@ -1006,7 +1006,7 @@ var defaultParameters = map[string]struct {
 	InproxyClientWebRTCAwaitDataChannelTimeout:         {value: 20 * time.Second, minimum: time.Duration(0), flags: useNetworkLatencyMultiplier},
 	InproxyProxyDestinationDialTimeout:                 {value: 20 * time.Second, minimum: time.Duration(0), flags: useNetworkLatencyMultiplier},
 	InproxyProxyRelayInactivityTimeout:                 {value: 5 * time.Minute, minimum: time.Duration(0), flags: useNetworkLatencyMultiplier},
-	InproxyPsiphonAPIRequestTimeout:                    {value: 10 * time.Second, minimum: 1 * time.Second, flags: useNetworkLatencyMultiplier},
+	InproxyVaipnAPIRequestTimeout:                    {value: 10 * time.Second, minimum: 1 * time.Second, flags: useNetworkLatencyMultiplier},
 	InproxyProxyTotalActivityNoticePeriod:              {value: 5 * time.Minute, minimum: 1 * time.Second},
 	InproxyPersonalPairingConnectionWorkerPoolSize:     {value: 2, minimum: 1},
 	InproxyClientDialRateLimitQuantity:                 {value: 2, minimum: 0},
