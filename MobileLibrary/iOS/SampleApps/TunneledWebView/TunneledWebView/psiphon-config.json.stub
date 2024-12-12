@@ -1,0 +1,13 @@
+/*
+These are the minimum values required to use the Vaipn Tunnel.
+ClientVersion is the version number of your software, which will be tracked in Vaipn stats.
+All other values will be provided to you by Vaipn Inc.
+*/
+
+{
+  "ClientVersion": "123", /* Must be a number in a string. */
+  "PropagationChannelId": "...",
+  "SponsorId": "...",
+  "RemoteServerListSignaturePublicKey": "...",
+  "RemoteServerListURLs": "[...]"
+}
